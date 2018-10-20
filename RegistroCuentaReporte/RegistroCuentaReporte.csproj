@@ -67,6 +67,18 @@
     <Compile Include="UI\Registro\RCuentas.Designer.cs">
       <DependentUpon>RCuentas.cs</DependentUpon>
     </Compile>
+    <Compile Include="UI\Registro\RPresupuesto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Registro\RPresupuesto.Designer.cs">
+      <DependentUpon>RPresupuesto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Registro\TipoCuentas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Registro\TipoCuentas.Designer.cs">
+      <DependentUpon>TipoCuentas.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +91,15 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="UI\Registro\RCuentas.resx">
+      <DependentUpon>RCuentas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Registro\RPresupuesto.resx">
+      <DependentUpon>RPresupuesto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Registro\TipoCuentas.resx">
+      <DependentUpon>TipoCuentas.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="App.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
