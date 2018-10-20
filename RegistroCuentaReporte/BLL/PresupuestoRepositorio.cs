@@ -37,7 +37,7 @@ namespace RegistroCuentaReporte.BLL
                     foreach (var item in presupuesto.Detalle)
                     {
                         int pre = item.Cuentas.CuentaId;
-                        string p = item.Presupuesto.Descripcion;
+                        double p = item.Presupuesto.Descuento;
 
 
 

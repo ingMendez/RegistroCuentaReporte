@@ -14,9 +14,22 @@ namespace RegistroCuentaReporte.UI.Registro
 {
     public partial class RPresupuesto : Form
     {
+        private RepositorioBase<Presupuesto> repositorio;
+        public List<DetallesPresupuestos>Detalle { get; set; }
         public RPresupuesto()
         {
             InitializeComponent();
+            this.Detalle = new List<DetallesPresupuestos>();
+        }
+        private void Limpiar()
+        {
+            PresupuestoId_numericUpDown.Value = 0;
+            Fecha_dateTimePicker.Value = DateTime.Now;
+            Descuento_numericUpDown.Value = 0;
+            TipoCuentacomboBox.Text = " ";
+            Valor_numericUpDown.Value = 0;
+            totalnumericUpDown.Value = 0 ;
+
         }
         private void LlenarComboBox()
         {
@@ -25,6 +38,18 @@ namespace RegistroCuentaReporte.UI.Registro
             TipoCuentacomboBox.ValueMember = "CuentaId";
             TipoCuentacomboBox.DisplayMember = "Descripcion";
 
+        }
+        private Presupuesto LlenaClase()
+        {
+            Presupuesto presupuesto = new Presupuesto();
+                presupuesto.PresupuestoId = Convert.ToInt32(PresupuestoId_numericUpDown.Value);
+                presupuesto.Fecha = Fecha_dateTimePicker.Value;
+                presupuesto.Descuento = Convert.ToInt32(Descuento_numericUpDown.Value);
+                presupuesto.TiposCuentas = (int)TipoCuentacomboBox.SelectedValue;
+                presupuesto.valor = Convert.ToInt32(Valor_numericUpDown.Value);
+                presupuesto.Monto = Convert.ToInt32(totalnumericUpDown.Value);
+                return presupuesto;
+            
         }
 
         private void Add_button_Click(object sender, EventArgs e)
@@ -60,5 +85,84 @@ namespace RegistroCuentaReporte.UI.Registro
             RCuentas rcuenta = new RCuentas();
             rcuenta.ShowDialog();
         }
+
+        private void NuevoButton_Click(object sender, EventArgs e)
+        {
+            Limpiar();
+        }
+
+        private void Guardarbutton_Click(object sender, EventArgs e)
+        {
+            repositorio = new RepositorioBase<Presupuesto>(new Contexto());
+            Presupuesto presupuesto;
+            bool paso = false;
+            presupuesto = LlenaClase();
+            if (!GuardarValidar())
+            {
+                return;
+            }
+            if(PresupuestoId_numericUpDown.Value == 0)
+            {
+                paso = repositorio.Guardar(presupuesto);
+            }
+            else
+            {
+                if (!ExisteEnBaseDeDatos())
+                {
+                    MessageBox.Show("no se puede modificar una cuenta que no existe", "fallo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                       return;
+                }
+                paso = repositorio.Modificar(presupuesto);
+            }
+            if (paso)
+            {
+                MessageBox.Show("Guardado", "Exito",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Limpiar();
+            }
+            else
+            {
+                MessageBox.Show("no se puede guardar", "fallO",
+                    MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+
+        }
+        private bool ExisteEnBaseDeDatos()
+        {
+            repositorio = new RepositorioBase<Presupuesto>(new Contexto());
+            Presupuesto presupuesto = repositorio.Buscar((int)PresupuestoId_numericUpDown.Value);
+            return (presupuesto != null);
+        }
+        private bool GuardarValidar()
+        {
+            bool paso = true;
+            if(Valor_numericUpDown.Value == 0)
+            {
+                SuperErrorProvider1.SetError(Valor_numericUpDown, "el campo esta vacio");
+                paso = false;
+            }
+            if (string.IsNullOrWhiteSpace(TipoCuentacomboBox.SelectedIndex.ToString()))
+            {
+                SuperErrorProvider1.SetError(TipoCuentacomboBox, "debe elegir uno");
+                paso = false;
+            }
+            if(Descuento_numericUpDown.Value ==0)
+            {
+                SuperErrorProvider1.SetError(Descuento_numericUpDown, " debe llenar el campo");
+                paso = false;
+            }
+            if (Fecha_dateTimePicker.Value < DateTime.Now || Fecha_dateTimePicker.Value > DateTime.Now) 
+            {
+                SuperErrorProvider1.SetError(Fecha_dateTimePicker, "digite una valida");
+                paso = false;
+            }
+            if (this.Detalle.Count == 0)
+            {
+                SuperErrorProvider1.SetError(DetallePresupuestodataGridView, "dee agregar algun presupuesto");
+                paso = false;
+            }
+            return paso;
+        }
+
     }
 }

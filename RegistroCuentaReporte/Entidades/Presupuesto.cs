@@ -14,9 +14,12 @@ namespace RegistroCuentaReporte.Entidades
         public DateTime Fecha { get; set; }
 
         //  [StringLength(100)]
-        public string Descripcion { get; set; }
+       // public string Descripcion { get; set; }
         //  [foreign]
         public float Monto { get; set; }
+        public float Descuento { get; set; }
+        public int TiposCuentas;
+        public float valor;
 
         public virtual List<DetallesPresupuestos> Detalle { get; set; }
 
@@ -24,7 +27,9 @@ namespace RegistroCuentaReporte.Entidades
         {
             PresupuestoId = 0;
             Fecha = DateTime.Now;
-            Descripcion = string.Empty;
+            Descuento = 0;
+            TiposCuentas = 0;
+            valor = 0;
             Monto = 0;
         }
 
