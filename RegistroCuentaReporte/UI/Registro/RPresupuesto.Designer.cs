@@ -30,16 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.TipoCuentacomboBox = new System.Windows.Forms.ComboBox();
-            this.button4 = new System.Windows.Forms.Button();
             this.Guardarbutton = new System.Windows.Forms.Button();
             this.NuevoButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.RemoverButton = new System.Windows.Forms.Button();
             this.DetallePresupuestodataGridView = new System.Windows.Forms.DataGridView();
             this.Ventana_button = new System.Windows.Forms.Button();
             this.Valor_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.Add_button = new System.Windows.Forms.Button();
-            this.Descuento_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.Fecha_dateTimePicker = new System.Windows.Forms.DateTimePicker();
             this.PresupuestoId_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
@@ -50,9 +47,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.totalnumericUpDown = new System.Windows.Forms.NumericUpDown();
             this.SuperErrorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.EliminarButton = new System.Windows.Forms.Button();
+            this.Buscarbutton = new System.Windows.Forms.Button();
+            this.DescripciontextBox = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DetallePresupuestodataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Valor_numericUpDown)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Descuento_numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PresupuestoId_numericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.totalnumericUpDown)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuperErrorProvider1)).BeginInit();
@@ -66,15 +65,6 @@
             this.TipoCuentacomboBox.Size = new System.Drawing.Size(94, 21);
             this.TipoCuentacomboBox.TabIndex = 82;
             this.TipoCuentacomboBox.SelectedIndexChanged += new System.EventHandler(this.TipoCuentacomboBox_SelectedIndexChanged);
-            // 
-            // button4
-            // 
-            this.button4.Location = new System.Drawing.Point(278, 389);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 33);
-            this.button4.TabIndex = 81;
-            this.button4.Text = "Eliminar";
-            this.button4.UseVisualStyleBackColor = true;
             // 
             // Guardarbutton
             // 
@@ -96,15 +86,6 @@
             this.NuevoButton.UseVisualStyleBackColor = true;
             this.NuevoButton.Click += new System.EventHandler(this.NuevoButton_Click);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(234, 44);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(57, 35);
-            this.button1.TabIndex = 78;
-            this.button1.Text = "Buscar";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // RemoverButton
             // 
             this.RemoverButton.BackColor = System.Drawing.Color.White;
@@ -116,11 +97,12 @@
             this.RemoverButton.TabIndex = 77;
             this.RemoverButton.Text = "Remover";
             this.RemoverButton.UseVisualStyleBackColor = false;
+            this.RemoverButton.Click += new System.EventHandler(this.RemoverButton_Click);
             // 
             // DetallePresupuestodataGridView
             // 
             this.DetallePresupuestodataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DetallePresupuestodataGridView.Location = new System.Drawing.Point(12, 186);
+            this.DetallePresupuestodataGridView.Location = new System.Drawing.Point(12, 184);
             this.DetallePresupuestodataGridView.Name = "DetallePresupuestodataGridView";
             this.DetallePresupuestodataGridView.Size = new System.Drawing.Size(330, 150);
             this.DetallePresupuestodataGridView.TabIndex = 76;
@@ -154,13 +136,6 @@
             this.Add_button.Text = "Add";
             this.Add_button.UseVisualStyleBackColor = true;
             this.Add_button.Click += new System.EventHandler(this.Add_button_Click);
-            // 
-            // Descuento_numericUpDown
-            // 
-            this.Descuento_numericUpDown.Location = new System.Drawing.Point(24, 82);
-            this.Descuento_numericUpDown.Name = "Descuento_numericUpDown";
-            this.Descuento_numericUpDown.Size = new System.Drawing.Size(174, 20);
-            this.Descuento_numericUpDown.TabIndex = 71;
             // 
             // Fecha_dateTimePicker
             // 
@@ -209,9 +184,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(20, 66);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(59, 13);
+            this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 65;
-            this.label3.Text = "Descuento";
+            this.label3.Text = "Descripcion";
             // 
             // label2
             // 
@@ -243,23 +218,51 @@
             // 
             this.SuperErrorProvider1.ContainerControl = this;
             // 
+            // EliminarButton
+            // 
+            this.EliminarButton.Location = new System.Drawing.Point(257, 389);
+            this.EliminarButton.Name = "EliminarButton";
+            this.EliminarButton.Size = new System.Drawing.Size(75, 33);
+            this.EliminarButton.TabIndex = 84;
+            this.EliminarButton.Text = "Eliminar";
+            this.EliminarButton.UseVisualStyleBackColor = true;
+            this.EliminarButton.Click += new System.EventHandler(this.EliminarButton_Click);
+            // 
+            // Buscarbutton
+            // 
+            this.Buscarbutton.Location = new System.Drawing.Point(247, 55);
+            this.Buscarbutton.Name = "Buscarbutton";
+            this.Buscarbutton.Size = new System.Drawing.Size(57, 35);
+            this.Buscarbutton.TabIndex = 85;
+            this.Buscarbutton.Text = "Buscar";
+            this.Buscarbutton.UseVisualStyleBackColor = true;
+            this.Buscarbutton.Click += new System.EventHandler(this.Buscarbutton_Click);
+            // 
+            // DescripciontextBox
+            // 
+            this.DescripciontextBox.Location = new System.Drawing.Point(24, 93);
+            this.DescripciontextBox.Name = "DescripciontextBox";
+            this.DescripciontextBox.Size = new System.Drawing.Size(175, 20);
+            this.DescripciontextBox.TabIndex = 86;
+            this.DescripciontextBox.TextChanged += new System.EventHandler(this.DescripciontextBox_TextChanged);
+            // 
             // RPresupuesto
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(369, 450);
+            this.ClientSize = new System.Drawing.Size(365, 427);
+            this.Controls.Add(this.DescripciontextBox);
+            this.Controls.Add(this.Buscarbutton);
+            this.Controls.Add(this.EliminarButton);
             this.Controls.Add(this.totalnumericUpDown);
             this.Controls.Add(this.TipoCuentacomboBox);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.Guardarbutton);
             this.Controls.Add(this.NuevoButton);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.RemoverButton);
             this.Controls.Add(this.DetallePresupuestodataGridView);
             this.Controls.Add(this.Ventana_button);
             this.Controls.Add(this.Valor_numericUpDown);
             this.Controls.Add(this.Add_button);
-            this.Controls.Add(this.Descuento_numericUpDown);
             this.Controls.Add(this.Fecha_dateTimePicker);
             this.Controls.Add(this.PresupuestoId_numericUpDown);
             this.Controls.Add(this.label6);
@@ -270,9 +273,9 @@
             this.Controls.Add(this.label1);
             this.Name = "RPresupuesto";
             this.Text = "RPresupuesto";
+            this.Load += new System.EventHandler(this.RPresupuesto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.DetallePresupuestodataGridView)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Valor_numericUpDown)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Descuento_numericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PresupuestoId_numericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.totalnumericUpDown)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.SuperErrorProvider1)).EndInit();
@@ -284,16 +287,13 @@
         #endregion
 
         private System.Windows.Forms.ComboBox TipoCuentacomboBox;
-        private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button Guardarbutton;
         private System.Windows.Forms.Button NuevoButton;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button RemoverButton;
         private System.Windows.Forms.DataGridView DetallePresupuestodataGridView;
         private System.Windows.Forms.Button Ventana_button;
         private System.Windows.Forms.NumericUpDown Valor_numericUpDown;
         private System.Windows.Forms.Button Add_button;
-        private System.Windows.Forms.NumericUpDown Descuento_numericUpDown;
         private System.Windows.Forms.DateTimePicker Fecha_dateTimePicker;
         private System.Windows.Forms.NumericUpDown PresupuestoId_numericUpDown;
         private System.Windows.Forms.Label label6;
@@ -304,5 +304,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown totalnumericUpDown;
         private System.Windows.Forms.ErrorProvider SuperErrorProvider1;
+        private System.Windows.Forms.Button EliminarButton;
+        private System.Windows.Forms.Button Buscarbutton;
+        private System.Windows.Forms.TextBox DescripciontextBox;
     }
 }

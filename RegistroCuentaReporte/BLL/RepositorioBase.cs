@@ -5,6 +5,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using RegistroCuentaReporte.BLL;
+using RegistroCuentaReporte.Entidades;
 
 namespace RegistroCuentaReporte.BLL
 {
@@ -34,13 +35,15 @@ namespace RegistroCuentaReporte.BLL
             return entity;
         }
 
-        public bool Eliminar(int id)
+        public virtual bool Eliminar(int id)
         {
             bool paso = false;
 
             try
             {
                 T Entity = _contexto.Set<T>().Find(id);
+                _contexto.Set<T>().Remove(Entity);
+
                 paso = _contexto.SaveChanges() > 0;
 
             }
@@ -85,7 +88,9 @@ namespace RegistroCuentaReporte.BLL
 
         public virtual bool Modificar(T entity)
         {
+            RepositorioBase<Presupuesto> repositorio = new RepositorioBase<Presupuesto>(new Contexto());
             bool paso = false;
+            _contexto = new Contexto();
             try
             {
                 _contexto.Entry(entity).State = System.Data.Entity.EntityState.Modified;

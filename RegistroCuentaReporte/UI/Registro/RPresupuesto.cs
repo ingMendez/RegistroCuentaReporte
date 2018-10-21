@@ -14,23 +14,38 @@ namespace RegistroCuentaReporte.UI.Registro
 {
     public partial class RPresupuesto : Form
     {
-        private RepositorioBase<Presupuesto> repositorio;
+        RepositorioBase<Presupuesto> repositorio;
         public List<DetallesPresupuestos>Detalle { get; set; }
         public RPresupuesto()
         {
             InitializeComponent();
             this.Detalle = new List<DetallesPresupuestos>();
+            LlenarComboBox();
         }
+
         private void Limpiar()
         {
             PresupuestoId_numericUpDown.Value = 0;
             Fecha_dateTimePicker.Value = DateTime.Now;
-            Descuento_numericUpDown.Value = 0;
-            TipoCuentacomboBox.Text = " ";
+            DescripciontextBox.Text =string.Empty;
+            TipoCuentacomboBox.Text = string.Empty;
             Valor_numericUpDown.Value = 0;
             totalnumericUpDown.Value = 0 ;
-
+            this.Detalle = new List<DetallesPresupuestos>();
+            CargarGrid();
         }
+
+        private void LlenaCampo(Presupuesto presupuesto)
+        {
+            //RepositorioBase<Presupuesto> repositorio = new RepositorioBase<Presupuesto>(new Contexto());
+           PresupuestoId_numericUpDown.Value = presupuesto.PresupuestoId;
+            DescripciontextBox.Text =presupuesto.Descripcion;
+            Fecha_dateTimePicker.Value = presupuesto.Fecha;
+             Valor_numericUpDown.Value =Convert.ToDecimal(presupuesto.Monto);
+
+            this.Detalle = presupuesto.Presupuestos;
+            CargarGrid();
+                }
         private void LlenarComboBox()
         {
             RepositorioBase<Cuentas> CuentaRepositorio = new RepositorioBase<Cuentas>(new Contexto());
@@ -44,33 +59,33 @@ namespace RegistroCuentaReporte.UI.Registro
             Presupuesto presupuesto = new Presupuesto();
                 presupuesto.PresupuestoId = Convert.ToInt32(PresupuestoId_numericUpDown.Value);
                 presupuesto.Fecha = Fecha_dateTimePicker.Value;
-                presupuesto.Descuento = Convert.ToInt32(Descuento_numericUpDown.Value);
-                presupuesto.TiposCuentas = (int)TipoCuentacomboBox.SelectedValue;
-                presupuesto.valor = Convert.ToInt32(Valor_numericUpDown.Value);
-                presupuesto.Monto = Convert.ToInt32(totalnumericUpDown.Value);
-                return presupuesto;
+                presupuesto.Descripcion = DescripciontextBox.Text; 
+                presupuesto.Monto = Convert.ToDouble(Valor_numericUpDown.Value);
+                presupuesto.Presupuestos = this.Detalle;
+            return presupuesto;
             
         }
 
         private void Add_button_Click(object sender, EventArgs e)
        {
-            List<DetallesPresupuestos> detalle = new List<DetallesPresupuestos>();
+           // List<DetallesPresupuestos> detalle = new List<DetallesPresupuestos>();
 
             if (DetallePresupuestodataGridView.DataSource != null)
             {
-                detalle = (List<DetallesPresupuestos>)DetallePresupuestodataGridView.DataSource;
+               this.Detalle = (List<DetallesPresupuestos>)DetallePresupuestodataGridView.DataSource;
             }
 
-            detalle.Add(new DetallesPresupuestos(
+            this.Detalle.Add(
+                new DetallesPresupuestos(
                 id: 0,
                 presupuestoid: (int)PresupuestoId_numericUpDown.Value,
-                tipoCuentas: 10,//(int)TipoCuentacomboBox.SelectedValue,
-                cuentaid: 10,//(int)CuentaidComboBox.SelectedValue,
-                valor: (float)Convert.ToSingle(Valor_numericUpDown.Value)
+                Cuentaid: TipoCuentacomboBox.SelectedIndex,
+                valor:Convert.ToDouble(Valor_numericUpDown.Value)
                 ));
-
-            DetallePresupuestodataGridView.DataSource = null;
-            DetallePresupuestodataGridView.DataSource = detalle;
+            SuperErrorProvider1.Clear();
+            CargarGrid();
+            ////DetallePresupuestodataGridView.DataSource = null;
+           // DetallePresupuestodataGridView.DataSource = Detalle;
             //  LlenarTotal();
 
         }
@@ -84,6 +99,7 @@ namespace RegistroCuentaReporte.UI.Registro
         {
             RCuentas rcuenta = new RCuentas();
             rcuenta.ShowDialog();
+            LlenarComboBox();
         }
 
         private void NuevoButton_Click(object sender, EventArgs e)
@@ -136,6 +152,7 @@ namespace RegistroCuentaReporte.UI.Registro
         private bool GuardarValidar()
         {
             bool paso = true;
+            SuperErrorProvider1.Clear();
             if(Valor_numericUpDown.Value == 0)
             {
                 SuperErrorProvider1.SetError(Valor_numericUpDown, "el campo esta vacio");
@@ -146,23 +163,84 @@ namespace RegistroCuentaReporte.UI.Registro
                 SuperErrorProvider1.SetError(TipoCuentacomboBox, "debe elegir uno");
                 paso = false;
             }
-            if(Descuento_numericUpDown.Value ==0)
+            if(string.IsNullOrWhiteSpace(DescripciontextBox.Text))
             {
-                SuperErrorProvider1.SetError(Descuento_numericUpDown, " debe llenar el campo");
-                paso = false;
-            }
-            if (Fecha_dateTimePicker.Value < DateTime.Now || Fecha_dateTimePicker.Value > DateTime.Now) 
-            {
-                SuperErrorProvider1.SetError(Fecha_dateTimePicker, "digite una valida");
+                SuperErrorProvider1.SetError(DescripciontextBox, " debe llenar el campo");
                 paso = false;
             }
             if (this.Detalle.Count == 0)
             {
-                SuperErrorProvider1.SetError(DetallePresupuestodataGridView, "dee agregar algun presupuesto");
+                SuperErrorProvider1.SetError(DetallePresupuestodataGridView, "debe agregar algun presupuesto");
                 paso = false;
             }
             return paso;
         }
+        private void CargarGrid()
+        {
+            DetallePresupuestodataGridView.DataSource = null;
+            DetallePresupuestodataGridView.DataSource =this.Detalle;
 
+        }
+        private void RemoverButton_Click(object sender, EventArgs e)
+        {
+            if (DetallePresupuestodataGridView.Rows.Count > 0 && DetallePresupuestodataGridView.CurrentRow != null)
+            {
+                Detalle.RemoveAt(DetallePresupuestodataGridView.CurrentRow.Index);
+                CargarGrid();
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void EliminarButton_Click(object sender, EventArgs e)
+        {
+            SuperErrorProvider1.Clear();
+            int id;
+            int.TryParse(PresupuestoId_numericUpDown.Text, out id);
+
+            if (!ExisteEnBaseDeDatos())
+            {
+                SuperErrorProvider1.SetError(PresupuestoId_numericUpDown, "no se pudo eliminar una persona que no existen");
+                return;
+            }
+            if (repositorio.Eliminar(id))
+            {
+                Limpiar();
+                MessageBox.Show("Eliminado");
+            }
+        }
+
+        private void Buscarbutton_Click(object sender, EventArgs e)
+        {
+            int id;
+            Presupuesto presupuesto = new Presupuesto();
+            int.TryParse(PresupuestoId_numericUpDown.Text, out id);
+            presupuesto = repositorio.Buscar(id);
+
+            if (presupuesto != null)
+            {
+                MessageBox.Show("Persona Encontrada", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                LlenaCampo(presupuesto);
+
+            }
+            else
+            {
+                MessageBox.Show("Persona no econtrada", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Limpiar();
+            }
+        }
+
+        private void DescripciontextBox_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RPresupuesto_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

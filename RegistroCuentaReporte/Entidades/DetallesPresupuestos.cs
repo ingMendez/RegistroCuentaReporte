@@ -10,45 +10,45 @@ namespace RegistroCuentaReporte.Entidades
     public class DetallesPresupuestos
     {
         [Key]
-        public int Id { get; set; }
+        public int PresupuestoDetalleId { get; set; }
 
         public int PresupuestoId { get; set; }
 
-        public int CuentaId { get; set; }
+        public int  CuentaId { get; set; }
 
-        public int TipoCuentaId { get; set; }
+        public Double Total { get; set; }
 
-        public float Valor { get; set; }
+        public Double Valor { get; set; }
 
-        [ForeignKey("CuentaId")]
+        /*[ForeignKey("CuentaId")]
         public virtual Cuentas Cuentas { get; set; }
 
         [ForeignKey("PresupuestoId")]
         public virtual Presupuesto Presupuesto { get; set; }
         [ForeignKey("TipoCuentaId")]
         public virtual TiposCuentas TiposCuentas { get; set; }
-
+        */
         public DetallesPresupuestos()
         {
-            this.Id = 0;
-            this.PresupuestoId = 0;
-            this.CuentaId = 0;
-            this.TipoCuentaId = 0;
-            this.Valor = 0;
+            PresupuestoDetalleId = 0;
+            PresupuestoId = 0;
+            CuentaId = 0;
+            Valor = 0;
+            Total = 0;
         }
-        public DetallesPresupuestos(int id, int presupuestoid, int cuentaid, int tipoCuentas, float valor)
+        public DetallesPresupuestos(int id, int presupuestoid, int Cuentaid, Double valor)
         {
-            Id = id;
-            PresupuestoId = presupuestoid;
-            CuentaId = cuentaid;
-            TipoCuentaId = tipoCuentas;
-            Valor = valor;
+            this.PresupuestoDetalleId = id;
+            this.PresupuestoId = presupuestoid;
+            this.CuentaId =CuentaId;
+            this.Valor = valor;
+            //this.Total = total;
         }
 
-        public override string ToString()
+       /* public override string ToString()
         {
-            return "Cuenta:" + this.CuentaId.ToString() + ":Valor" + this.Valor;
-        }
+            return "Cuenta:" + this.Descuento.ToString() + ":Valor" + this.Valor;
+        }*/
 
 
     }

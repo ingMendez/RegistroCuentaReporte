@@ -43,6 +43,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.errorProviderTipo)).BeginInit();
             this.SuspendLayout();
             // 
+            // NuevoButton
+            // 
+            NuevoButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            NuevoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            NuevoButton.Location = new System.Drawing.Point(29, 104);
+            NuevoButton.Margin = new System.Windows.Forms.Padding(2);
+            NuevoButton.Name = "NuevoButton";
+            NuevoButton.Size = new System.Drawing.Size(56, 42);
+            NuevoButton.TabIndex = 65;
+            NuevoButton.Text = "Nuevo";
+            NuevoButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            NuevoButton.UseVisualStyleBackColor = true;
+            NuevoButton.Click += new System.EventHandler(this.NuevoButton_Click);
+            // 
             // DescripciontextBox
             // 
             this.DescripciontextBox.Location = new System.Drawing.Point(88, 60);
@@ -105,19 +119,7 @@
             this.GuardarButton.Text = "Guardar";
             this.GuardarButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.GuardarButton.UseVisualStyleBackColor = true;
-            // 
-            // NuevoButton
-            // 
-            NuevoButton.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            NuevoButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            NuevoButton.Location = new System.Drawing.Point(29, 104);
-            NuevoButton.Margin = new System.Windows.Forms.Padding(2);
-            NuevoButton.Name = "NuevoButton";
-            NuevoButton.Size = new System.Drawing.Size(56, 42);
-            NuevoButton.TabIndex = 65;
-            NuevoButton.Text = "Nuevo";
-            NuevoButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
-            NuevoButton.UseVisualStyleBackColor = true;
+            this.GuardarButton.Click += new System.EventHandler(this.GuardarButton_Click_1);
             // 
             // BuscarButton
             // 
@@ -131,6 +133,7 @@
             this.BuscarButton.Text = "buscar";
             this.BuscarButton.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.BuscarButton.UseVisualStyleBackColor = true;
+            this.BuscarButton.Click += new System.EventHandler(this.BuscarButton_Click);
             // 
             // errorProviderTipo
             // 

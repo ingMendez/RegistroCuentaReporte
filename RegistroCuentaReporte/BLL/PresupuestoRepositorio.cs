@@ -28,30 +28,38 @@ namespace RegistroCuentaReporte.BLL
 
             public override Presupuesto Buscar(int id)
             {
+
+                Contexto contexto = new Contexto();
                 Presupuesto presupuesto = new Presupuesto();
                 try
                 {
-                    presupuesto = _contexto.Presupuestos.Find(id);
-                    presupuesto.Detalle.Count();
-
-                    foreach (var item in presupuesto.Detalle)
-                    {
-                        int pre = item.Cuentas.CuentaId;
-                        double p = item.Presupuesto.Descuento;
-
-
-
-                    }
-                    _contexto.Dispose();
-
+                    presupuesto = contexto.Presupuestos.Find(id);
+                    presupuesto.Presupuestos.Count();
+                    /* if (presupuesto != null)
+                     {
+                         //Cargar la lista en este punto porque
+                         //luego de hacer Dispose() el Contexto 
+                         //no sera posible leer la lista
+                         presupuesto.Presupuestos.Count();
+                         //Cargar las Descripcion
+                         //Cargar el Nombre Descripcion
+                         foreach (var item in presupuesto.Detalle)
+                         {
+                             //forzando la Descripcion y Nombres a cargarse
+                             string s = item.Cuentas.Descripcion;
+                             string ss = item.TiposCuentas.Descripcion;
+                         }
+                     }*
+                     contexto.Dispose();
+                 */
                 }
                 catch (Exception)
                 {
                     throw;
                 }
-
                 return presupuesto;
             }
+           
 
             public override bool Modificar(Presupuesto entity)
             {
@@ -59,9 +67,9 @@ namespace RegistroCuentaReporte.BLL
 
                 try
                 {
-                    foreach (var item in entity.Detalle)
+                    foreach (var item in entity.Presupuestos)
                     {
-                        var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
+                        var estado = item.PresupuestoDetalleId > 0 ? EntityState.Modified : EntityState.Added;
                         _contexto.Entry(item).State = estado;
                     }
                     ///indica que se ha medificado

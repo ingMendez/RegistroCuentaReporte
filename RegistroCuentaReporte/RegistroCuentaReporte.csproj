@@ -101,6 +101,10 @@
       <DependentUpon>TipoCuentas.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />
+    <None Include="Properties\DataSources\RegistroCuentaReporte.Entidades.Cuentas.datasource" />
+    <None Include="Properties\DataSources\RegistroCuentaReporte.Entidades.DetallesPresupuestos.datasource" />
+    <None Include="Properties\DataSources\RegistroCuentaReporte.Entidades.Presupuesto.datasource" />
+    <None Include="Properties\DataSources\RegistroCuentaReporte.Entidades.TiposCuentas.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

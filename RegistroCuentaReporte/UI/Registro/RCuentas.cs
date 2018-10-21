@@ -57,7 +57,8 @@ namespace RegistroCuentaReporte.UI.Registro
             TipoComboBox.SelectedIndex = cuenta.TipoId;
             MontoNumericUpDown.Value = Convert.ToDecimal(cuenta.Monto);
         }
-        private void Buscarbutton_Click_1(object sender, EventArgs e)
+
+        private void Buscarbutton_Click(object sender, EventArgs e)
         {
             int id;
             //= Convert.ToInt32(CuentaIdnumericUpDown.Value);
@@ -77,12 +78,12 @@ namespace RegistroCuentaReporte.UI.Registro
             }
         }
 
-        private void NuevoButton_Click_1(object sender, EventArgs e)
+        private void Nuevobutton_Click(object sender, EventArgs e)
         {
             Limpiar();
         }
 
-        private void Guardarbutton_Click(object sender, EventArgs e)
+        private void Guardarbutton_Click_1(object sender, EventArgs e)
         {
             repositorio = new RepositorioBase<Cuentas>(new Contexto());
 
@@ -123,12 +124,12 @@ namespace RegistroCuentaReporte.UI.Registro
             }
             else
             {
-
                 MessageBox.Show("No se pudo guardar", "Falló",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
+
         private bool ExisteEnLaBaseDeDatos()
         {
             repositorio = new RepositorioBase<Cuentas>(new Contexto());
@@ -137,6 +138,7 @@ namespace RegistroCuentaReporte.UI.Registro
 
             return (cuenta != null);
         }
+
         private bool GuardarValidar()
         {
             bool paso = true;
@@ -158,8 +160,6 @@ namespace RegistroCuentaReporte.UI.Registro
             TipoCuentas tipoCuenta = new TipoCuentas();
             tipoCuenta.ShowDialog();
         }
-
-
 
         private void Eliminarbutton_Click(object sender, EventArgs e)
         {
@@ -197,7 +197,20 @@ namespace RegistroCuentaReporte.UI.Registro
 
         }
 
-       
+        private void TipoCuentasButton_Click(object sender, EventArgs e)
+        {
+            TipoCuentas tipo = new TipoCuentas();
+            tipo.ShowDialog();
+            LlenarComboBox();
+        }
+
+
+
+
+
+
+
+
 
 
 

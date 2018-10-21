@@ -59,6 +59,7 @@
             this.TipoCuentasButton.TabIndex = 72;
             this.TipoCuentasButton.Text = "Tipo";
             this.TipoCuentasButton.UseVisualStyleBackColor = true;
+            this.TipoCuentasButton.Click += new System.EventHandler(this.TipoCuentasButton_Click);
             // 
             // TipoComboBox
             // 
@@ -137,6 +138,7 @@
             this.Buscarbutton.TabIndex = 63;
             this.Buscarbutton.Text = "Buscar";
             this.Buscarbutton.UseVisualStyleBackColor = true;
+            this.Buscarbutton.Click += new System.EventHandler(this.Buscarbutton_Click);
             // 
             // Guardarbutton
             // 
@@ -146,6 +148,7 @@
             this.Guardarbutton.TabIndex = 62;
             this.Guardarbutton.Text = "Guardar";
             this.Guardarbutton.UseVisualStyleBackColor = true;
+            this.Guardarbutton.Click += new System.EventHandler(this.Guardarbutton_Click_1);
             // 
             // Eliminarbutton
             // 
@@ -165,6 +168,7 @@
             this.Nuevobutton.TabIndex = 60;
             this.Nuevobutton.Text = "Nuevo";
             this.Nuevobutton.UseVisualStyleBackColor = true;
+            this.Nuevobutton.Click += new System.EventHandler(this.Nuevobutton_Click);
             // 
             // MyErrorProvider
             // 

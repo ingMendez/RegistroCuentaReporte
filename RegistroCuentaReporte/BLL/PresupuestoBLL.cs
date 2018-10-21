@@ -20,7 +20,7 @@ namespace RegistroCuentaReporte.BLL
             {
                 if (contexto.Presupuestos.Add(presupuesto) != null)
                 {
-                    foreach (var item in presupuesto.Detalle)
+                    foreach (var item in presupuesto.Presupuestos)
                     {
                         contexto.Cuenta.Find(item.CuentaId).Monto -= item.Valor;
                     }
@@ -50,33 +50,25 @@ namespace RegistroCuentaReporte.BLL
             try
             {
                 var MontoAterior = PresupuestoBLL.Buscar(presupuesto.PresupuestoId);
-                foreach (var item in MontoAterior.Detalle)
-                {
-                    contexto.Cuenta.Find(item.CuentaId).Monto -= item.Valor;
-                    if (!presupuesto.Detalle.ToList().Exists(v => v.Id == item.Id))
-                    {
-                        contexto.Cuenta.Find(item.CuentaId).Monto -= item.Valor;
-                        item.Cuentas = null;
-                        contexto.Entry(item).State = EntityState.Deleted;
-                    }
-                }
-                /// recorrer el detalle
-                foreach (var item in presupuesto.Detalle)
-                {
-                    //Sumar todas las cantidades cotizadas
-                    contexto.Cuenta.Find(item.CuentaId).Monto += item.Valor;
 
-                    //Muy importante indicar que pasara con la entidad del detalle
-                    var estado = item.Id > 0 ? EntityState.Modified : EntityState.Added;
+                foreach (var item in MontoAterior.Presupuestos)
+                {
+                    if (!presupuesto.Presupuestos.Exists(d => d.PresupuestoId == item.PresupuestoId))
+                        contexto.Entry(item).State = EntityState.Deleted;
+                    contexto.Cuenta.Find(item.CuentaId).Monto -= item.Valor;
+                }
+                foreach (var item in presupuesto.Presupuestos)
+                {
+                    var estado = (item.PresupuestoId == 0) ? EntityState.Added : EntityState.Modified;
                     contexto.Entry(item).State = estado;
                 }
                 contexto.Entry(presupuesto).State = EntityState.Modified;
-                //System.Data.Entity.EntityState.Modified;
                 if (contexto.SaveChanges() > 0)
                 {
                     paso = true;
                 }
-                contexto.Dispose();// serrar la conexion.
+
+                // serrar la conexion.
             }
             catch (Exception)
             {
@@ -99,7 +91,7 @@ namespace RegistroCuentaReporte.BLL
             {
                 Presupuesto presupuesto = contexto.Presupuestos.Find(id);
 
-                foreach (var item in presupuesto.Detalle)
+                foreach (var item in presupuesto.Presupuestos)
                 {
                     var cuentas = contexto.Cuenta.Find(item.CuentaId);
                     cuentas.Monto -= item.Valor;
@@ -133,22 +125,24 @@ namespace RegistroCuentaReporte.BLL
             try
             {
                 presupuesto = contexto.Presupuestos.Find(id);
-                if (presupuesto != null)
-                {
-                    //Cargar la lista en este punto porque
-                    //luego de hacer Dispose() el Contexto 
-                    //no sera posible leer la lista
-                    presupuesto.Detalle.Count();
-                    //Cargar las Descripcion
-                    //Cargar el Nombre Descripcion
-                    foreach (var item in presupuesto.Detalle)
-                    {
-                        //forzando la Descripcion y Nombres a cargarse
-                        string s = item.Cuentas.Descripcion;
-                        string ss = item.TiposCuentas.Descripcion;
-                    }
-                }
-                contexto.Dispose();
+                presupuesto.Presupuestos.Count();
+                /* if (presupuesto != null)
+                 {
+                     //Cargar la lista en este punto porque
+                     //luego de hacer Dispose() el Contexto 
+                     //no sera posible leer la lista
+                     presupuesto.Presupuestos.Count();
+                     //Cargar las Descripcion
+                     //Cargar el Nombre Descripcion
+                     foreach (var item in presupuesto.Detalle)
+                     {
+                         //forzando la Descripcion y Nombres a cargarse
+                         string s = item.Cuentas.Descripcion;
+                         string ss = item.TiposCuentas.Descripcion;
+                     }
+                 }*
+                 contexto.Dispose();
+             */
             }
             catch (Exception)
             {

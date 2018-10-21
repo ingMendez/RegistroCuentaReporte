@@ -25,6 +25,7 @@ namespace RegistroCuentaReporte.UI.Registro
             TipoIDnumericUpDown.Value = 0;
             DescripciontextBox.Text = string.Empty;
         }
+
         private TiposCuentas LlenaClase()
         {
             TiposCuentas tipoCuentas = new TiposCuentas()
@@ -34,21 +35,20 @@ namespace RegistroCuentaReporte.UI.Registro
             };
             return tipoCuentas;
         }
+
         private void LlenaCampo(TiposCuentas tipoCuentas)
         {
             TipoIDnumericUpDown.Value = tipoCuentas.TipoCuentaId;
             DescripciontextBox.Text = tipoCuentas.Descripcion;
         }
-        private void NuevoButton_Click_1(object sender, EventArgs e)
-        {
-            Limpiar();
-        }
+
         private bool ExisteEnLaBaseDeDatos()
         {
             repositorio = new RepositorioBase<TiposCuentas>(new Contexto());
             TiposCuentas tipoCuentas = repositorio.Buscar((int)TipoIDnumericUpDown.Value);
             return (tipoCuentas != null);
         }
+
         private bool GuardarValidar()
         {
             bool paso = true;
@@ -60,6 +60,7 @@ namespace RegistroCuentaReporte.UI.Registro
             }
             return paso;
         }
+
         private void GuardarButton_Click_1(object sender, EventArgs e)
         {
             repositorio = new RepositorioBase<TiposCuentas>(new Contexto());
@@ -89,7 +90,7 @@ namespace RegistroCuentaReporte.UI.Registro
                 MessageBox.Show("No se Guardo el Tipo De Cuenta!!", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void BuscarButton_Click_1(object sender, EventArgs e)
+        private void BuscarButton_Click(object sender, EventArgs e)
         {
             int id;
             repositorio = new RepositorioBase<TiposCuentas>(new Contexto());
@@ -106,7 +107,7 @@ namespace RegistroCuentaReporte.UI.Registro
                 MessageBox.Show("Tipo de Cuenta no Encontrada", "Fallo!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
 
-        private void EliminarButton_Click_1(object sender, EventArgs e)
+        private void EliminarButton_Click(object sender, EventArgs e)
         {
             int id;
             repositorio = new RepositorioBase<TiposCuentas>(new Contexto());
@@ -131,9 +132,9 @@ namespace RegistroCuentaReporte.UI.Registro
 
         }
 
-        private void EliminarButton_Click(object sender, EventArgs e)
+        private void NuevoButton_Click(object sender, EventArgs e)
         {
-
+            Limpiar();
         }
     }
 }
