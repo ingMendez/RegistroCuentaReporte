@@ -182,7 +182,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(20, 66);
+            this.label3.Location = new System.Drawing.Point(23, 77);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(63, 13);
             this.label3.TabIndex = 65;
@@ -250,6 +250,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lime;
             this.ClientSize = new System.Drawing.Size(365, 427);
             this.Controls.Add(this.DescripciontextBox);
             this.Controls.Add(this.Buscarbutton);

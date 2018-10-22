@@ -1,4 +1,5 @@
 ﻿using RegistroCuentaReporte.Entidades;
+using RegistroCuentaReporte.UI.Consultas;
 using RegistroCuentaReporte.UI.Registro;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,13 @@ namespace RegistroCuentaReporte
         {
             TipoCuentas tc = new TipoCuentas();
             tc.Show();
+        }
+
+        private void presupuestoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ConsultaDeCuentas ct = new ConsultaDeCuentas ();
+            ct.ShowDialog();
+           
         }
     }
 }

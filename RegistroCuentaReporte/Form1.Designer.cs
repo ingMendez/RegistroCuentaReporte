@@ -32,10 +32,10 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fiToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroPresupuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.registroDeCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tiposCuentasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.consultasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.presupuestoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ayudaToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -72,14 +72,6 @@
             this.registrosToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.registrosToolStripMenuItem.Text = "Registros";
             // 
-            // consultasToolStripMenuItem
-            // 
-            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.presupuestoToolStripMenuItem});
-            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
-            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
-            this.consultasToolStripMenuItem.Text = "Consultas";
-            // 
             // registroPresupuestoToolStripMenuItem
             // 
             this.registroPresupuestoToolStripMenuItem.Name = "registroPresupuestoToolStripMenuItem";
@@ -101,11 +93,20 @@
             this.tiposCuentasToolStripMenuItem.Text = "Tipos Cuentas";
             this.tiposCuentasToolStripMenuItem.Click += new System.EventHandler(this.tiposCuentasToolStripMenuItem_Click);
             // 
+            // consultasToolStripMenuItem
+            // 
+            this.consultasToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.presupuestoToolStripMenuItem});
+            this.consultasToolStripMenuItem.Name = "consultasToolStripMenuItem";
+            this.consultasToolStripMenuItem.Size = new System.Drawing.Size(71, 20);
+            this.consultasToolStripMenuItem.Text = "Consultas";
+            // 
             // presupuestoToolStripMenuItem
             // 
             this.presupuestoToolStripMenuItem.Name = "presupuestoToolStripMenuItem";
             this.presupuestoToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
             this.presupuestoToolStripMenuItem.Text = "Reporte Presupuesto";
+            this.presupuestoToolStripMenuItem.Click += new System.EventHandler(this.presupuestoToolStripMenuItem_Click);
             // 
             // salirToolStripMenuItem
             // 
