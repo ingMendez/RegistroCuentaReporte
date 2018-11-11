@@ -41,7 +41,7 @@ namespace RegistroCuentaReporte.UI.Registro
            PresupuestoId_numericUpDown.Value = presupuesto.PresupuestoId;
             DescripciontextBox.Text =presupuesto.Descripcion;
             Fecha_dateTimePicker.Value = presupuesto.Fecha;
-             Valor_numericUpDown.Value =Convert.ToDecimal(presupuesto.Monto);
+             Valor_numericUpDown.Value = Convert.ToDecimal(presupuesto.Monto);
 
             this.Detalle = presupuesto.Presupuestos;
             CargarGrid();
